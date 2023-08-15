@@ -1,0 +1,32 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+
+mat-toolbar {
+  background: #650476;
+  color: white;
+}
+
+mat-sidenav{
+  margin: 16px;
+  width: 200px;
+  border-right: none;
+  background: #000;
+  background-image: url('./../assets/images/nav.png');
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  background-size: cover;
+}
+
+.avatar{
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
