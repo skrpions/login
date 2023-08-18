@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon  *ngIf="sidenav.opened">close</mat-icon>
+  </button>
+  <span>Login</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav="matSidenav" mode="side" opened>
+  <img class="avatar mat-elevation-z8" src="assets/images/avatars/sho.jpeg" >
+  <h4 class="name">Nestor Martínez</h4>
+  <p class="designation">sksmartinez@gmail.com</p>
+
+  <mat-divider></mat-divider>
+
+  <button mat-button class="menu-button">
+    <mat-icon>person</mat-icon>
+    <span>Crear</span>
+  </button>
+
+  <button mat-button class="menu-button">
+    <mat-icon>person</mat-icon>
+    <span>Person</span>
+  </button>
+  <button mat-button class="menu-button">
+    <mat-icon>person</mat-icon>
+    <span>Interés</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-button class="menu-button">
+    <mat-icon>logout</mat-icon>
+    <span>Salir</span>
+  </button>
+
+
+</mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      Main content
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

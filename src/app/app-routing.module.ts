@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './routes/home/views/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./routes/students/students.module').then(m => m.StudentsModule)
+    redirectTo: '/login',
+    pathMatch:'full'
   },
-/*   {
-    path: 'home', // (Private) 🚷 Dashboard ...
+  {
+    path: 'login',
+    loadChildren: () => import('./routes/auth/auth.module').then(m => m.AuthModule),
+  },
+  {
+    path: 'dashboard', // (Private) 🚷 Dashboard ...
     component: HomeComponent,
-    loadChildren: () => import('./routes/home/home.module').then(m => m.HomeModule),
-    //canActivate: [authenticationGuard]
-  }, */
+    //canActivate: [authenticationGuard],
+    children:[
+      {
+        path: 'students',
+        loadChildren: () => import('./routes/students/students.module').then(m => m.StudentsModule),
+      }
+    ]
+  },
   {
     path: '**',
     redirectTo: '/'
