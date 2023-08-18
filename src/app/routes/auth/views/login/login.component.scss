@@ -1,0 +1,66 @@
+mat-sidenav-container {
+  height: 100%;
+  background-color: transparent !important;
+
+}
+
+mat-sidenav-content{
+  height: calc(100vh - 65px);
+}
+
+.content {
+  height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+  display: flex;
+  font-size: 2rem;
+
+}
+
+.logo{
+  position: relative;
+  left: 30%;
+  right: 50%;
+
+}
+
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh; /* 25% de la altura de la ventana */
+  background-image: url('./../../../../../assets/images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+}
+
+.avatar {
+  position: relative; /* Añade posición relativa para ajustar z-index */
+  margin-top: -50px; /* Ajusta este valor para posicionar el avatar adecuadamente */
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  z-index: 1; /* Avatar por encima del fondo */
+}
+
+.login-form {
+
+}
+/* Resto de tus estilos... */
+

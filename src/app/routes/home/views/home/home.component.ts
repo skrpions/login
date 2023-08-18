@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class HomeComponent {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private change: ChangeDetectorRef){}
+  constructor(private router: Router ,private observer: BreakpointObserver, private change: ChangeDetectorRef){}
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width:800px)']).subscribe((res:any) => {
@@ -24,5 +25,9 @@ export class HomeComponent {
     });
 
     this.change.detectChanges();
+  }
+
+  logout() {
+    this.router.navigateByUrl('/');
   }
 }

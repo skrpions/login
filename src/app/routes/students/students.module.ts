@@ -16,8 +16,8 @@ import { MaterialModule } from '../../shared/material.module';
   ],
   imports: [
     CommonModule,
+    StudentsRoutingModule,
     MaterialModule,
-    StudentsRoutingModule
   ]
 })
 export class StudentsModule { }

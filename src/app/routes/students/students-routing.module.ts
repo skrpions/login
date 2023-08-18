@@ -9,6 +9,14 @@ const routes: Routes = [
     component:  ListStudentsComponent
   },
   {
+    path: 'add',
+    component: DetailStudentComponent
+  },
+  {
+    path: 'list',
+    component: ListStudentsComponent
+  },
+  {
     path: 'detail/:id',
     component: DetailStudentComponent
   }

@@ -7,7 +7,8 @@ mat-sidenav-container {
 }
 
 mat-toolbar {
-  background: #650476;
+  /* background: #650476; */
+  background: #091013;
   color: white;
 }
 
@@ -16,7 +17,7 @@ mat-sidenav{
   width: 200px;
   border-right: none;
   background: #091013;
-  background-image: url('./../assets/images/nav.png');
+  background-image: url('./../../../../../assets/images/nav.png');
   color: white;
   border-radius: 10px;
   padding: 16px;
@@ -73,3 +74,8 @@ mat-divider {
 mat-sidenav-content{
   height: calc(100vh - 65px);
 }
+
+button:hover {
+  background-color: #646464;
+}
+

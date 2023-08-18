@@ -21,32 +21,33 @@
 
   <mat-divider></mat-divider>
 
-  <button mat-button class="menu-button">
+  <button [routerLink]="['students/list']" mat-button class="menu-button">
     <mat-icon>person</mat-icon>
-    <span>Crear</span>
+    <span>
+      List
+    </span>
   </button>
 
-  <button mat-button class="menu-button">
+  <button [routerLink]="['students/add']" mat-button class="menu-button">
     <mat-icon>person</mat-icon>
-    <span>Person</span>
-  </button>
-  <button mat-button class="menu-button">
-    <mat-icon>person</mat-icon>
-    <span>Interés</span>
+    <span>
+      Crear
+    </span>
   </button>
 
   <mat-divider></mat-divider>
 
-  <button mat-button class="menu-button">
+  <button (click)="logout()" mat-button class="menu-button">
     <mat-icon>logout</mat-icon>
     <span>Salir</span>
   </button>
 
 
+
 </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      Main content
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
