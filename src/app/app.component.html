@@ -1,8 +1,9 @@
 <!-- <router-outlet></router-outlet> -->
 
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+  <button mat-icon-button class="example-icon" *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon  *ngIf="sidenav.opened">close</mat-icon>
   </button>
   <span>Login</span>
   <span class="example-spacer"></span>
@@ -15,7 +16,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav #sidenav="matSidenav" mode="side" opened>
   <img class="avatar mat-elevation-z8" src="assets/images/avatars/sho.jpeg" >
   <h4 class="name">Nestor Martínez</h4>
   <p class="designation">sksmartinez@gmail.com</p>
