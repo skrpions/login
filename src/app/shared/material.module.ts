@@ -78,4 +78,4 @@ const ANGULAR_MATERIAL_MODULES: any[] = [
   ],
   exports:[...ANGULAR_MATERIAL_MODULES]
 })
-export class AngularMaterialModule { }
+export class MaterialModule { }

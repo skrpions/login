@@ -5,7 +5,7 @@ import { StudentsRoutingModule } from './students-routing.module';
 import { ListStudentsComponent } from './views/list-students/list-students.component';
 import { FormStudentComponent } from './views/form-student/form-student.component';
 import { DetailStudentComponent } from './views/detail-student/detail-student.component';
-import { AngularMaterialModule } from '../../shared/angular-material.module';
+import { MaterialModule } from '../../shared/material.module';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { AngularMaterialModule } from '../../shared/angular-material.module';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule,
+    MaterialModule,
     StudentsRoutingModule
   ]
 })
