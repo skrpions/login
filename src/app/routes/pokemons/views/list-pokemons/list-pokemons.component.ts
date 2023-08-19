@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
 export interface UserData {
   id: string;
+  avatar: string;
   name: string;
-  progress: string;
-  fruit: string;
+  attack: string;
+  defense: string;
 }
 
 /** Constants used to fill up our data base. */
@@ -43,12 +44,12 @@ const NAMES: string[] = [
 ];
 
 @Component({
-  selector: 'app-list-students',
-  templateUrl: './list-students.component.html',
-  styleUrls: ['./list-students.component.scss']
+  selector: 'app-list-pokemons',
+  templateUrl: './list-pokemons.component.html',
+  styleUrls: ['./list-pokemons.component.scss']
 })
-export class ListStudentsComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+export class ListPokemonsComponent {
+  displayedColumns: string[] = ['avatar', 'name', 'attack', 'defense', 'actions'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -84,11 +85,18 @@ function createNewUser(id: number): UserData {
     ' ' +
     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
     '.';
+  const avatar =
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+    ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+    '.';
 
   return {
     id: id.toString(),
+    avatar: '1',
     name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+    attack: Math.round(Math.random() * 100).toString(),
+    defense: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
   };
 }
+

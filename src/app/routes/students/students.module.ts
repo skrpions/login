@@ -6,6 +6,7 @@ import { ListStudentsComponent } from './views/list-students/list-students.compo
 import { FormStudentComponent } from './views/form-student/form-student.component';
 import { DetailStudentComponent } from './views/detail-student/detail-student.component';
 import { MaterialModule } from '../../shared/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MaterialModule } from '../../shared/material.module';
     CommonModule,
     StudentsRoutingModule,
     MaterialModule,
+    SharedModule
   ]
 })
 export class StudentsModule { }

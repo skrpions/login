@@ -72,10 +72,7 @@ const ANGULAR_MATERIAL_MODULES: any[] = [
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    ...ANGULAR_MATERIAL_MODULES
-  ],
-  exports:[...ANGULAR_MATERIAL_MODULES]
+  imports: [...ANGULAR_MATERIAL_MODULES],
+  exports: [...ANGULAR_MATERIAL_MODULES]
 })
 export class MaterialModule { }

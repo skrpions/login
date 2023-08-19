@@ -3,7 +3,7 @@
     <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon  *ngIf="sidenav.opened">close</mat-icon>
   </button>
-  <span>Login</span>
+  <span>Skrpion</span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
@@ -21,19 +21,21 @@
 
   <mat-divider></mat-divider>
 
-  <button [routerLink]="['students/list']" mat-button class="menu-button">
+  <button [routerLink]="['pokemons']" mat-button class="menu-button">
     <mat-icon>person</mat-icon>
     <span>
-      List
+      Pokemons
     </span>
   </button>
 
-  <button [routerLink]="['students/add']" mat-button class="menu-button">
+  <!-- <button [routerLink]="['students']" mat-button class="menu-button">
     <mat-icon>person</mat-icon>
     <span>
-      Crear
+      Students
     </span>
   </button>
+ -->
+
 
   <mat-divider></mat-divider>
 

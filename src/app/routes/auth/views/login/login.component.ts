@@ -13,7 +13,7 @@ export class LoginComponent {
   }
 
   login(){
-    this.router.navigateByUrl('/dashboard/students');
+    this.router.navigateByUrl('/dashboard/pokemons');
   }
 
 }

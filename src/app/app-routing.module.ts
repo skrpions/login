@@ -18,6 +18,10 @@ const routes: Routes = [
     //canActivate: [authenticationGuard],
     children:[
       {
+        path: 'pokemons',
+        loadChildren: () => import('./routes/pokemons/pokemons.module').then(m => m.PokemonsModule),
+      },
+      {
         path: 'students',
         loadChildren: () => import('./routes/students/students.module').then(m => m.StudentsModule),
       }
