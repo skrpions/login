@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PokemonEntity } from '../../domain/entities/pokemon-entity';
+import { PokemonApplication } from '../../application/pokemon-application';
 export interface UserData {
   id: string;
   avatar: string;
@@ -10,38 +12,6 @@ export interface UserData {
   defense: string;
 }
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
 
 @Component({
   selector: 'app-list-pokemons',
@@ -49,18 +19,38 @@ const NAMES: string[] = [
   styleUrls: ['./list-pokemons.component.scss']
 })
 export class ListPokemonsComponent {
-  displayedColumns: string[] = ['avatar', 'name', 'attack', 'defense', 'actions'];
-  dataSource: MatTableDataSource<UserData>;
+
+  icon_header = 'code';
+  title_header = 'titles.projects';
+
+  pokemonList: PokemonEntity[] = [];
+
+  filterValue = '';
+  totalRecords = 0;
+
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+
+  dataSourceClone: PokemonEntity[] = [];
+
+
+
+  displayedColumns: string[] = ['avatar', 'name', 'actions'];
+  /* displayedColumns: string[] = ['avatar', 'name', 'attack', 'defense', 'actions']; */
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  constructor(private readonly pokemonApplication: PokemonApplication,) {
+    this.getAll();
+  }
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  getAll() {
+    this.pokemonApplication.list().subscribe({
+      next: (data: any) => {
+        this.dataSource.data = data.results; // Asignar los datos al atributo 'data'
+      },
+    });
   }
 
   ngAfterViewInit() {
@@ -69,34 +59,13 @@ export class ListPokemonsComponent {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+   /*  const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-    }
+    } */
   }
 }
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-  const avatar =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    avatar: '1',
-    name: name,
-    attack: Math.round(Math.random() * 100).toString(),
-    defense: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
-}
 

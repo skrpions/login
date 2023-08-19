@@ -9,6 +9,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeModule } from './routes/home/home.module';
 import { StudentsModule } from './routes/students/students.module';
 import { AuthModule } from './routes/auth/auth.module';
+import { PokemonApplication } from './routes/pokemons/application/pokemon-application';
+import { PokemonInfrastructure } from './routes/pokemons/infrastructure/pokemon-infrastructure';
+import { HttpClientModule } from '@angular/common/http';
+
+// Declaron constantes para los providers
+const application = [
+  PokemonApplication,
+];
+const infrastructure = [
+  PokemonInfrastructure
+];
 
 @NgModule({
   declarations: [
@@ -18,13 +29,16 @@ import { AuthModule } from './routes/auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
     NgbModule,
     AuthModule,
     HomeModule,
     StudentsModule,
   ],
-  providers: [],
+  providers: [
+    ...application,
+    ...infrastructure,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
