@@ -75,7 +75,7 @@
           <td mat-cell *matCellDef="let row" class="row-align-rigth">
 
             <!-- Edit -->
-            <button mat-icon-button matTooltip="Edit">
+            <button (click)="openForm('0ms', '0ms', row)" mat-icon-button matTooltip="Edit">
               <mat-icon>edit</mat-icon>
             </button>
 

@@ -1,4 +1,4 @@
-<mat-toolbar align="center" class="space-between" color="primary">
+<mat-toolbar align="center" class="space-between black-toolbar">
   <span class=" centered">
     <mat-icon>{{icon_header}}</mat-icon>
     {{title_header}}
@@ -12,11 +12,14 @@
 
   <form [formGroup]="reactiveForm">
 
+    <!-- <pre>{{reactiveForm.value | json}}</pre> -->
+
     <div class="row">
 
       <!-- Foto -->
       <div class="col-md-4">
-       <!--  <img [ngSrc]="image" width="230" height="290" priority
+        <img [src]="image" width="200" height="213">
+        <!-- <img [ngSrc]="image" width="230" height="290" priority
              sizes="(max-width: 768px) 100vw, 50vw"> -->
 
 
@@ -50,24 +53,24 @@
 
           </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Url:</mat-label>
-          <input formControlName="image" type="text" matInput required>
-          <mat-error *ngIf="">Url image is required</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Url:</mat-label>
+            <input formControlName="image" type="text" matInput required (input)="updateImageFromUrl()">
+            <mat-error *ngIf="">Url image is required</mat-error>
+          </mat-form-field>
 
 
       </div>
 
     </div>
 
-    <div class="row" style="justify-content: flex-end;">
-      <mat-dialog-actions>
+    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+      <mat-dialog-actions style="width: 100%;">
 
         <!-- Save -->
         <button type="button" mat-raised-button mat-dialog-close
                 color="primary" [disabled]="reactiveForm.invalid" cdkFocusInitial
-                (click)="save()">
+                (click)="save()" style="margin-right: 10px;">
           <mat-icon>save</mat-icon>
           Save
         </button>
@@ -83,6 +86,7 @@
 
       </mat-dialog-actions>
     </div>
+
 
   </form>
 

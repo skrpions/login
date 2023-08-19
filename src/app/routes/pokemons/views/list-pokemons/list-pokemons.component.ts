@@ -59,15 +59,13 @@ export class ListPokemonsComponent {
     console.log('row', row);
 
     const reference = this.dialog.open(FormPokemonComponent, {
+      data: row,
       width: '800px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
 
-
-    /*
-
-    reference.subscribe(response => {
+    reference.afterClosed().subscribe(response => {
       if (!response) return;
 
       const id = response.id;
@@ -75,20 +73,24 @@ export class ListPokemonsComponent {
 
       if (id) {
         // Update entity
-        this.driverApplication.update(id, response).subscribe({
+        this.pokemonApplication.update(id, response).subscribe({
           next: () => {
-            this.toast.success(this.translate.instant(this.messages.update));
+            console.log('Actualizado');
+
+            //this.toast.success(this.translate.instant(this.messages.update));
           },
         });
       } else {
         // New entity
-        this.driverApplication.insert(response).subscribe({
+        this.pokemonApplication.insert(response).subscribe({
           next: () => {
-            this.toast.success(this.translate.instant(this.messages.insert));
+            console.log('Insertado');
+
+            //this.toast.success(this.translate.instant(this.messages.insert));
           },
         });
       }
-    }); */
+    });
   }
 
   ngAfterViewInit() {
@@ -97,12 +99,12 @@ export class ListPokemonsComponent {
   }
 
   applyFilter(event: Event) {
-   /*  const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-    } */
+    }
   }
 }
 

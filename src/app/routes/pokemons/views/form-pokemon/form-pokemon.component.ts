@@ -8,10 +8,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./form-pokemon.component.scss']
 })
 export class FormPokemonComponent {
-  icon_header = 'toys';
-  title_header: string;
+  icon_header = '';
+  title_header = '';
   reactiveForm!: FormGroup;
-  image = '';
+  image = 'assets/images/icon-image.png';
 
   constructor(
     private fb: FormBuilder,
@@ -20,10 +20,8 @@ export class FormPokemonComponent {
   ) {
     console.log('data', data);
 
+    this.icon_header = data ? 'edit' : 'add'; // TODO: Estos textos deben ser dinámicos.
     this.title_header = data ? 'Edit' : 'New'; // TODO: Estos textos deben ser dinámicos.
-    this.image = data
-      ? 'assets/images/avatar.jpg'
-      : 'https://images.unsplash.com/photo-1683220643085-1fa0ad87a1a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
     this.initForm();
   }
 
@@ -35,6 +33,14 @@ export class FormPokemonComponent {
       image: [this.data?.image, [Validators.required]],
       defense: [this.data?.defense, [Validators.required, Validators.min(0)]],
     });
+  }
+
+  updateImageFromUrl() {
+  const imageUrl = this.reactiveForm.value.image;
+
+    if (imageUrl && imageUrl !== this.image) {
+      this.image = imageUrl;
+    }
   }
 
   save() {
