@@ -4,6 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PokemonEntity } from '../../domain/entities/pokemon-entity';
 import { PokemonApplication } from '../../application/pokemon-application';
+import { MatDialog } from '@angular/material/dialog';
+import { FormPokemonComponent } from '../form-pokemon/form-pokemon.component';
 export interface UserData {
   id: string;
   avatar: string;
@@ -41,7 +43,7 @@ export class ListPokemonsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private readonly pokemonApplication: PokemonApplication,) {
+  constructor(private readonly pokemonApplication: PokemonApplication,public dialog: MatDialog) {
     this.getAll();
   }
 
@@ -51,6 +53,42 @@ export class ListPokemonsComponent {
         this.dataSource.data = data.results; // Asignar los datos al atributo 'data'
       },
     });
+  }
+
+  openForm(enterAnimationDuration: string, exitAnimationDuration: string, row: any = null!) {
+    console.log('row', row);
+
+    const reference = this.dialog.open(FormPokemonComponent, {
+      width: '800px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+
+
+    /*
+
+    reference.subscribe(response => {
+      if (!response) return;
+
+      const id = response.id;
+      delete response.id;
+
+      if (id) {
+        // Update entity
+        this.driverApplication.update(id, response).subscribe({
+          next: () => {
+            this.toast.success(this.translate.instant(this.messages.update));
+          },
+        });
+      } else {
+        // New entity
+        this.driverApplication.insert(response).subscribe({
+          next: () => {
+            this.toast.success(this.translate.instant(this.messages.insert));
+          },
+        });
+      }
+    }); */
   }
 
   ngAfterViewInit() {

@@ -1,1 +1,90 @@
-<p>form-pokemon works!</p>
+<mat-toolbar align="center" class="space-between" color="primary">
+  <span class=" centered">
+    <mat-icon>{{icon_header}}</mat-icon>
+    {{title_header}}
+  </span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+
+  <form [formGroup]="reactiveForm">
+
+    <div class="row">
+
+      <!-- Foto -->
+      <div class="col-md-4">
+       <!--  <img [ngSrc]="image" width="230" height="290" priority
+             sizes="(max-width: 768px) 100vw, 50vw"> -->
+
+
+      </div>
+
+      <!-- Names | Attack -->
+      <div class="col-md-8">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name:</mat-label>
+          <input formControlName="name" type="text" matInput required>
+          <mat-error *ngIf="">Name is required</mat-error>
+        </mat-form-field>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Attack:</mat-label>
+              <input formControlName="attack" type="text" matInput required>
+              <mat-error *ngIf="">Attack is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Defense:</mat-label>
+              <input formControlName="defense" type="text" matInput required>
+              <mat-error *ngIf="">Defense is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Url:</mat-label>
+          <input formControlName="image" type="text" matInput required>
+          <mat-error *ngIf="">Url image is required</mat-error>
+        </mat-form-field>
+
+
+      </div>
+
+    </div>
+
+    <div class="row" style="justify-content: flex-end;">
+      <mat-dialog-actions>
+
+        <!-- Save -->
+        <button type="button" mat-raised-button mat-dialog-close
+                color="primary" [disabled]="reactiveForm.invalid" cdkFocusInitial
+                (click)="save()">
+          <mat-icon>save</mat-icon>
+          Save
+        </button>
+
+        <!-- Close -->
+        <button style="background-color: #212121 !important; color: white; "
+                type="button"
+                mat-raised-button
+                mat-dialog-close>
+          <mat-icon>close</mat-icon>
+          Close
+        </button>
+
+      </mat-dialog-actions>
+    </div>
+
+  </form>
+
+
+</mat-dialog-content>
