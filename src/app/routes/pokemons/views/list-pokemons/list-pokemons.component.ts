@@ -2,17 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { PokemonEntity } from '../../domain/entities/pokemon-entity';
 import { PokemonApplication } from '../../application/pokemon-application';
 import { MatDialog } from '@angular/material/dialog';
 import { FormPokemonComponent } from '../form-pokemon/form-pokemon.component';
-export interface UserData {
-  id: string;
-  avatar: string;
-  name: string;
-  attack: string;
-  defense: string;
-}
+import { PokemonEntity } from '../../domain/entities/pokemon-entity';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -25,34 +19,63 @@ export class ListPokemonsComponent {
   icon_header = 'code';
   title_header = 'titles.projects';
 
-  pokemonList: PokemonEntity[] = [];
-
   filterValue = '';
   totalRecords = 0;
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-
-  dataSourceClone: PokemonEntity[] = [];
-
-
-
-  displayedColumns: string[] = ['avatar', 'name', 'actions'];
-  /* displayedColumns: string[] = ['avatar', 'name', 'attack', 'defense', 'actions']; */
-
+  displayedColumns: string[] = ['avatar', 'name', 'attack', 'defense', 'actions'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private readonly pokemonApplication: PokemonApplication,public dialog: MatDialog) {
+  constructor(
+    private readonly pokemonApplication: PokemonApplication,
+    private toastr: ToastrService,
+    public dialog: MatDialog
+    ) {
     this.getAll();
   }
 
   getAll() {
     this.pokemonApplication.list().subscribe({
-      next: (data: any) => {
-        this.dataSource.data = data.results; // Asignar los datos al atributo 'data'
+      next: (data: PokemonEntity[]) => {
+        console.log('Data: ', data);
+
+        this.dataSource = new MatTableDataSource<any>(data);
+        this.dataSource.paginator = this.paginator; // Configura el paginador
+        this.dataSource.sort = this.sort;
+        this.totalRecords = data.length; // Actualiza la cantidad total de registros
       },
     });
+  }
+
+  /* getAll() {
+    this.pokemonApplication.list().subscribe({
+      next: (data: any) => {
+        console.log('Data: ', data);
+
+        this.dataSource = data; // Asignar los datos al atributo 'data'
+        this.totalRecords = data.length;
+        //this.dataSource.data = data.results; // Asignar los datos al atributo 'data'
+      },
+    });
+  } */
+
+
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.paginator.pageSize = 5; // Configura el tamaño de página que desees
+  }
+
+  applyFilter(event: Event) {
+    this.filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = this.filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   openForm(enterAnimationDuration: string, exitAnimationDuration: string, row: any = null!) {
@@ -75,16 +98,30 @@ export class ListPokemonsComponent {
         // Update entity
         this.pokemonApplication.update(id, response).subscribe({
           next: () => {
-            console.log('Actualizado');
+            console.log('Actualizado:', response);
+
+            // Actualiza la fuente de datos con el nuevo registro
+            this.getAll();
+            this.toastr.success('Updated', 'Ok!');
+            //this.dataSource.data = [...this.dataSource.data];
 
             //this.toast.success(this.translate.instant(this.messages.update));
           },
         });
       } else {
+
+        // Agregaré un id manualmente para que no de error al insertar
+        response.id = this.dataSource.data.length + 1;
+
         // New entity
         this.pokemonApplication.insert(response).subscribe({
           next: () => {
             console.log('Insertado');
+
+            // Actualiza la fuente de datos con el nuevo registro
+            this.getAll();
+            this.toastr.success('Added', 'Ok!');
+            //this.dataSource.data = [...this.dataSource.data];
 
             //this.toast.success(this.translate.instant(this.messages.insert));
           },
@@ -93,18 +130,19 @@ export class ListPokemonsComponent {
     });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  delete(id: number, record = '') {
+    console.log('id: ', id + ' - record: ', record);
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.pokemonApplication.delete(id).subscribe({
+      next: () => {
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+        // Actualiza la fuente de datos con el nuevo registro
+        this.getAll();
+        //this.dataSource.data = [...this.dataSource.data];
+        this.toastr.success('Deleted', 'Ok!');
+        //this.toast.success(this.translate.instant(this.messages.delete));
+      },
+    });
   }
 }
 

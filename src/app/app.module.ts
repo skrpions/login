@@ -12,6 +12,8 @@ import { AuthModule } from './routes/auth/auth.module';
 import { PokemonApplication } from './routes/pokemons/application/pokemon-application';
 import { PokemonInfrastructure } from './routes/pokemons/infrastructure/pokemon-infrastructure';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+
 
 // Declaron constantes para los providers
 const application = [
@@ -34,6 +36,7 @@ const infrastructure = [
     AuthModule,
     HomeModule,
     StudentsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     ...application,

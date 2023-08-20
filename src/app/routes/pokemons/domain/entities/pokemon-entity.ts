@@ -10,8 +10,9 @@ interface PokemonOptionals {
   idAuthor: number;
   type: string;
 }
+export type PokemonEntity = Required<PokemonEssentials> & Partial<PokemonOptionals>;
 
-export type PokemonProperties = Required<PokemonEssentials> & Partial<PokemonOptionals>;
+/* export type PokemonProperties = Required<PokemonEssentials> & Partial<PokemonOptionals>;
 export type PokemonUpdate = Partial<PokemonEssentials>;
 
 export class PokemonEntity {
@@ -39,7 +40,6 @@ export class PokemonEntity {
       hp: this.hp,
       idAuthor: this.idAuthor,
       type: this.type,
-
     };
   }
 
@@ -47,3 +47,4 @@ export class PokemonEntity {
     Object.assign(this, properties);
   }
 }
+ */

@@ -12,80 +12,86 @@
 
   <form [formGroup]="reactiveForm">
 
-    <!-- <pre>{{reactiveForm.value | json}}</pre> -->
-
     <div class="row">
 
       <!-- Foto -->
       <div class="col-md-4">
-        <img [src]="image" width="200" height="213">
-        <!-- <img [ngSrc]="image" width="230" height="290" priority
-             sizes="(max-width: 768px) 100vw, 50vw"> -->
-
-
+        <img ngSrc="{{image}}" width="200" height="213" priority
+             sizes="(max-width: 768px) 100vw, 50vw">
       </div>
 
       <!-- Names | Attack -->
       <div class="col-md-8">
 
+        <!-- Name -->
         <mat-form-field appearance="outline">
           <mat-label>Name:</mat-label>
           <input formControlName="name" type="text" matInput required>
-          <mat-error *ngIf="">Name is required</mat-error>
+          <mat-error *ngIf="nameField?.hasError('required')">Name is required</mat-error>
+          <mat-error *ngIf="nameField?.hasError('minlength')">Insufficient Characters</mat-error>
+          <mat-error *ngIf="nameField?.hasError('maxlength')">Character Limit Reached</mat-error>
         </mat-form-field>
 
+        <!-- Attack & Defense -->
         <div class="row">
 
           <div class="col-md-6">
             <mat-form-field appearance="outline">
               <mat-label>Attack:</mat-label>
-              <input formControlName="attack" type="text" matInput required>
-              <mat-error *ngIf="">Attack is required</mat-error>
+              <input formControlName="attack" type="number" matInput required>
+              <mat-error *ngIf="attackField?.hasError('required')">Attack is required</mat-error>
+              <mat-error *ngIf="attackField?.hasError('min')">Minimum Value: 0</mat-error>
+              <mat-error *ngIf="attackField?.hasError('max')">Maximum Value: 100</mat-error>
             </mat-form-field>
           </div>
+
           <div class="col-md-6">
             <mat-form-field appearance="outline">
               <mat-label>Defense:</mat-label>
-              <input formControlName="defense" type="text" matInput required>
-              <mat-error *ngIf="">Defense is required</mat-error>
+              <input formControlName="defense" type="number" matInput required>
+              <mat-error *ngIf="defenseField?.hasError('required')">Defense is required</mat-error>
+              <mat-error *ngIf="defenseField?.hasError('min')">Minimum Value: 0</mat-error>
+              <mat-error *ngIf="defenseField?.hasError('max')">Maximum Value: 100</mat-error>
             </mat-form-field>
           </div>
 
-          </div>
+        </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Url:</mat-label>
-            <input formControlName="image" type="text" matInput required (input)="updateImageFromUrl()">
-            <mat-error *ngIf="">Url image is required</mat-error>
-          </mat-form-field>
+        <!-- Url -->
+        <mat-form-field appearance="outline">
+          <mat-label>Url:</mat-label>
+          <input formControlName="image" type="text" matInput required (input)="updateImageFromUrl()">
+          <mat-error *ngIf="imageField?.hasError('required')">Url image is required</mat-error>
+        </mat-form-field>
 
+        <div class="row" >
+          <mat-dialog-actions >
+
+            <!-- Save -->
+            <button type="button" mat-raised-button mat-dialog-close
+                    color="primary" [disabled]="reactiveForm.invalid" cdkFocusInitial
+                    (click)="save()">
+              <mat-icon>save</mat-icon>
+              Save
+            </button>
+
+            <!-- Close -->
+            <button class="black-close"
+                    type="button"
+                    mat-raised-button
+                    mat-dialog-close>
+              <mat-icon>close</mat-icon>
+              Close
+            </button>
+
+          </mat-dialog-actions>
+        </div>
 
       </div>
 
     </div>
 
-    <div class="row" style="display: flex; justify-content: center; align-items: center;">
-      <mat-dialog-actions style="width: 100%;">
 
-        <!-- Save -->
-        <button type="button" mat-raised-button mat-dialog-close
-                color="primary" [disabled]="reactiveForm.invalid" cdkFocusInitial
-                (click)="save()" style="margin-right: 10px;">
-          <mat-icon>save</mat-icon>
-          Save
-        </button>
-
-        <!-- Close -->
-        <button style="background-color: #212121 !important; color: white; "
-                type="button"
-                mat-raised-button
-                mat-dialog-close>
-          <mat-icon>close</mat-icon>
-          Close
-        </button>
-
-      </mat-dialog-actions>
-    </div>
 
 
   </form>
